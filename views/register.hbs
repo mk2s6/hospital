@@ -1,0 +1,55 @@
+{{> header }}
+
+	<div id="main_body">
+		<div class="main_content">
+			<h1>{{title}}</h1>
+            <div id="selectedForm">
+                <form id="regForm" action='' class='form-container-register'>
+                        <div class='mdc-text-field' data-mdc-auto-init='MDCTextField'>
+                            <input class='mdc-text-field__input' type='text' id='adminId' size='24' maxlength='10' required>
+                            <label for='adminId' class='mdc-floating-label'>Enter Admin Id</label>
+                            <div class='mdc-line-ripple'></div> 
+                        </div>
+                        <div class="inline-div">
+                            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                                <input class="mdc-text-field__input" type="password" id="password" autocomplete="off" name='password' size="24" data-type="pwd-info1" id="pass" required>
+                                <label for="password" class="mdc-floating-label">Enter Password</label>
+                                <div class="mdc-line-ripple"></div> 
+                            </div>
+                                
+                        </div>
+                        <div id="pwd-info1">
+                            <p id="smallCh" class="invalid">Password Must contain one small letter</p>
+                            <p id="capital" class="invalid">Password Must contain one capital letter</p>
+                            <p id="number" class="invalid">Password Must contain one number</p>
+                            <P id="length" class="invalid">Password Must be Atleast 8 charecters</P>
+                        </div>
+
+                      <div class="inline-div">
+                          <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                              <input class="mdc-text-field__input" type="password" autocomplete="off" name='password' size="24" data-type="pwd-info2" id="rePass" required>
+                              <label for="password" class="mdc-floating-label">Re-Enter Password</label>
+                              <div class="mdc-line-ripple"></div> 
+                          </div>
+
+                      </div>
+                      <div id="pwd-info2">
+                          <p id="matches" class="invalid">Entered Passwords does not match</p>
+                      </div>
+		              
+                        <button type="submit" id="submitBtn" class="mdc-button mdc-button--raised" disabled="true">
+                            <i class="material-icons mdc-button__icon">how_to_reg</i>
+                            Register
+                        </button>
+                </form>
+            </div>
+		</div>
+    </div>
+    
+    <script>
+        window.mdc.autoInit();
+    </script>
+    <script src="js/register.js"></script>
+
+
+{{> footer-end }}
