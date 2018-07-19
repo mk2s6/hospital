@@ -95,13 +95,13 @@ passport.use(new LocalStrategy(
 	   			done(null, false , "Invalid Username");
 	   		} else {
 
-		   		const hash = results[0].password.toString();
-		   		// console.log(results[0]);
+				const hash = results[0].password.toString();
+				   
 		   		bcrypt.compare(password, hash, function (err, result) {
 		   			if (result) {
 		   				// console.log(result[0])
 		   				type = results[0].type;
-		   				return done(null, {user : results[0].username, type : results[0].type });
+		   				return done(null, results[0].username);
 		   			} else {
 		   				return done(null, false, "Invalid password");
 		   			}

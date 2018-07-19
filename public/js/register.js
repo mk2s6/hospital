@@ -3,7 +3,7 @@ $(function () {
     $('#submitBtn').on('click', function(event) {
         event.preventDefault();
         var username = $('#adminId').val();
-        var password = $('#password').val();
+        var password = $('#pass').val();
         
     	var user = {
             username : username,
@@ -14,6 +14,7 @@ $(function () {
 
         $.ajax({
             url : '/register',
+            method : 'POST',
             contentType: 'application/json',
             data : JSON.stringify(user),
             success : function (res) {
@@ -22,12 +23,12 @@ $(function () {
                 }
             },
             error : function (res,e, ts, et) {
-
+                alert("error");
                 console.log(res +"some error" + ts + " " + et);
             }
         });
     });
-
+    
     $('input[type=password]').keyup(function(event) {
         event.preventDefault();
 
@@ -57,7 +58,8 @@ $(function () {
         } else {
             number.removeClass('valid').addClass('invalid');
         }
-
+        console.log($('#pass').val());
+        console.log($('#rePass').val());
         if($('#rePass').val() == $('#pass').val()) {
         matches.removeClass('invalid').addClass('valid');
         } else {
