@@ -18,9 +18,8 @@ $(function () {
             contentType: 'application/json',
             data : JSON.stringify(user),
             success : function (res) {
-                if(window.confirm(res.msg)) {
-                    window.location = res.redirectTo;
-                }
+                window.alert(res.msg);
+                window.location = res.redirectTo;
             },
             error : function (res,e, ts, et) {
                 alert("error");

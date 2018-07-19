@@ -15,7 +15,7 @@ body {
 	top: 0;
 	margin : 0;
 	font-family: 'acme';
-	padding-top: 1%;
+	/* padding-top: 1%; */
 	line-height: 40px;
 	/*position: fixed;*/
 	position: sticky;
@@ -64,17 +64,28 @@ body {
 
 #nav_bar .nav_left {
 	text-align: left;
+	display : flex;
+	flex-wrap: nowrap;
 }
 
 #nav_bar .nav_right{
 	text-align: right;
 }
 
+#nav_bar h1 {
+	margin-top: 10px;
+}
+
+#nav_bar h1 span{
+	margin-top: -10px;
+}
+
+
 #nav_bar h1 a {
 	color: #f6f2fa;
 	font-size: 42px;
 	font-family: 'acme';
-	padding: 5px 5px 5px 15px;
+	padding: 5px 5px 5px 0px;
 }
 
 #main_body {
@@ -245,4 +256,37 @@ button[disabled=true], button[disabled=disabled] {
 
 .no-edit , .editable-edit, .editor-edit {
 	display: initial;
+}
+
+.centered {
+	padding-top: 20px;
+	display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+#patientsContent thead{
+	background-color : #3949AB;
+	color: #f5f2f2;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#patientsContent, #patientsContent th ,#patientsContent td {
+	text-align: center;
+	border: 2px solid #fff;
+	border-collapse: collapse;
+	padding: 15px;
+}
+
+#patients tr {
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#patients tr:nth-child(odd) {
+	background-color: #4FC3F7;
+	color: #f5f2f2;
+}
+#patients tr:nth-child(even) {
+	background-color: #039BE5;
+	color: #f5f2f2;
 }

@@ -16,7 +16,9 @@
 	<body>
 		<nav id="nav_bar">
 			<div class="nav_left">
-				<h1><a href="/">HOSPITAL MANAGEMENT</a></h1>
+				<h1>
+					<a href="/"><img src="assets/hospital.png" alt="icon" style="height : 40px;"> <span>HOSPITAL MANAGEMENT</span></a>
+				</h1>
 			</div>
 			<div class="nav_right">		
 			    <ul>
@@ -25,12 +27,10 @@
 
 				     	<li><a href="/viewPatients">View Patients Data</a></li>
 				     	<li><a href="/addPatient">Add Patients</a></li>
+				     	{{!-- <li><a href="/register">Register</a></li> --}}
 						<li><a href="/logout">logout</a></li>
 			    	{{else}}
-
 				        <li><a href="/login">Admin Login</a></li>
-				     	<li><a href="/register">Register</a></li>
-
 			    	{{/if}}
 			    </ul>
 			</div>

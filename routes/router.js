@@ -50,46 +50,77 @@ router.post('/register', function(req, res, next) {
 
 	const db = require('../dbconfig.js');
 
-	console.log("hello");
-
 	bcrypt.hash(password, saltRounds, function(err, hash) {
 		query = db.query('INSERT INTO users (username, password) VALUES (?, ?)',[username, hash], function (err, result, fields) {
 			if (err) {
 				// console.log(err);
 				if (err.code === "ER_DUP_ENTRY") res.send({
-					redirectTo: '/login',
+					redirectTo: '/',
 					msg : 'User Already Exists'
 				});
 				var str = JSON.stringify(err);
 				console.log(str)
-				// if (err === ) {}
-			} else {
-
-					db.query('SELECT * FROM users ORDER BY username DESC LIMIT 1', function(err, results, fields) {
-					if (err) throw err;
-					
-					var user = results[0].username;
-					req.login(user, function (err) {
-						if (err) console.log(err);
-						res.send({
-							redirectTo: '/',
-							msg: 'User Registerd Successfully'
-						});
-					});
-
-				});
 			}
+			// } else {
+			// 	if(!req.user)
+			// 		db.query('SELECT * FROM users ORDER BY username DESC LIMIT 1', function(err, results, fields) {
+			// 		if (err) throw err;
+					
+			// 		var user = results[0].username;
+			// 		req.login(user, function (err) {
+			// 			if (err) console.log(err);
+			// 			res.send({
+			// 				redirectTo: '/',
+			// 				msg: 'User Registerd Successfully'
+			// 			});
+			// 		});
+
+			// 	});
+			// }
 		});
 	});
 });
 
 router.get('/viewPatients', function (req, res) {
 	res.render('viewPatients', {title : "View patients Patients"});
-})
+});
 
 router.get('/addPatient', function (req, res) {
 	res.render('addPatient', {title : "Adding Patients"});
-})
+});
+
+router.post('/addPatient', function (req, res) {
+	console.log(req.body);
+	var d = new Date();
+	var date = d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();
+	var patient = [
+		req.body.pname,
+		req.body.pgender,
+		req.body.page,
+		date
+	];
+
+	const db = require('../dbconfig.js');
+
+	query = db.query('INSERT INTO patients (pname, pgender, page, regDate) values (?, ?,? , ?)',patient, function (err, results, fields) {
+		if (err) {
+			console.log(err);
+			res.send('Error Inserting Patient');
+		} else {
+			res.send({msg : 'Patient registerd sucessfully', redirectTo : '/addPatient'});
+		}
+	})
+
+});
+
+router.get('/patients', function (req, res) {
+	const db = require('../dbconfig.js');
+	query = db.query("SELECT pid, pname, pgender, page , date_format(regDate,'%d-%b-%Y') AS regDate FROM PATIENTS", function(err, results) {
+		var str = JSON.stringify(results);
+		var patients = JSON.parse(str);
+		res.json(patients);
+	});
+});
 
 passport.serializeUser(function(user, done) {
 	console.log("ser")
