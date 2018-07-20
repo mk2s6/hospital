@@ -1,16 +1,13 @@
- const express = require('express');
+const express = require('express');
 const path = require('path');
-var exphbs  = require('express-handlebars');
 const app = express();
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
-var type;
 
 const index = require('./routes/router');
 const hbs = require('express-hbs');
-const fs = require('fs');
 
 
 var session = require('express-session');
@@ -18,8 +15,6 @@ var MySQLStore = require('express-mysql-session')(session);
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
-
 
 require('dotenv').config();
 

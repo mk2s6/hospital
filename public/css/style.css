@@ -101,6 +101,7 @@ body {
 
 .main_content {
 	padding-left: 10px;
+	background-repeat: no-repeat;
 }
 
 .main_content h1 {
