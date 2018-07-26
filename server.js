@@ -65,10 +65,7 @@ passport.authenticate('local');
 app.use(function(req, res, next) {
 	res.locals.isAuthenticated = req.isAuthenticated();
 	if (req.isAuthenticated()) {
-		res.locals.username = req.user.user;
-		res.locals.type = req.user.type;
-		if (req.user.type === 'student') res.locals.confirmStudent = true;
-		else res.locals.confirmStudent = false;
+		res.locals.username = req.user;
 	}
 	next();	
 });

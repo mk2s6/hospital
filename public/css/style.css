@@ -3,21 +3,23 @@
 	margin: 0;
 }
 
+html {
+	height: 100%;
+}
+
 body {
 	background: #fff;
 	font-family: 'Varela Round', sans-serif;
 	font-size: 20px;
+	height: 100%;
 }
 
 #nav_bar {
 	background-color: #4A148C;
-	/*height: auto;*/
 	top: 0;
 	margin : 0;
 	font-family: 'acme';
-	/* padding-top: 1%; */
 	line-height: 40px;
-	/*position: fixed;*/
 	position: sticky;
 	z-index: 1030;
 	box-sizing: border-box;
@@ -88,31 +90,51 @@ body {
 	padding: 5px 5px 5px 0px;
 }
 
-#main_body {
-	margin-left: 13%;
-	height: auto;
-	margin-bottom: -100px;
-}
-
 #sidebar ul li:hover{
 	cursor: pointer;
 	background-color: #cccccc75;
 }
 
+body {
+	height: 100%;
+	font-family: 'Acme', sans-serif;
+}
+
+#imgCont {
+	min-width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: -1000;
+}
+
+#imgCont img {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+}
+
 .main_content {
 	padding-left: 10px;
-	background-repeat: no-repeat;
+	color: #DD2C00;
+	height: 85%;	
+	font-family: 'Acme', sans-serif;
+
 }
 
 .main_content h1 {
 	text-align: center;
+	vertical-align: middle;
+
 }
 
+.main_content h3 {
+	margin-right: 10px;
+	text-align: right; 
+}
 
 label {
-
 	font-family: 'Varela Round', sans-serif;
-
+	color: #880E4F;
 }
 
 .selection {
@@ -138,6 +160,11 @@ label {
 	display: block;
 	text-align: left;
 
+}
+
+#loginContent {
+	background-color: #BCAAA499;
+	width: max-content;
 }
 
 div>.form-container-register {
@@ -266,21 +293,28 @@ button[disabled=true], button[disabled=disabled] {
     justify-content: space-around;
 }
 
-#patientsContent thead{
+#patientsContent>thead>tr>th {
 	background-color : #3949AB;
 	color: #f5f2f2;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	padding: 15px 10px;
 }
 
 #patientsContent, #patientsContent th ,#patientsContent td {
 	text-align: center;
-	border: 2px solid #fff;
+	border: 2px solid transparent;
 	border-collapse: collapse;
-	padding: 15px;
+	padding: 0px 10px;
 }
 
-#patients tr {
+#patients , tbody, #loginContent{
+	background-color: #81D4FA99;
+}
+
+
+#patients tr td{
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	color: #311B92;
 }
 
 #patients tr:nth-child(odd) {

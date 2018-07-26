@@ -10,29 +10,36 @@ var passport = require('passport');
 
 router.use(parser.json());
 
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
 	console.log(req.user);
 	console.log(req.isAuthenticated());
   	res.render('index.hbs', { title: 'Hospital Management' });
 });
 
 router.get('/login', function (req, res, next) {
-	res.render('login.hbs', {title: 'Log In form'})
+	if(req.isAuthenticated()) {
+		return res.redirect('/');
+	}
+		res.render('login.hbs', {title: 'Log In form'});
 });	
 
 router.post('/login', function(req, res, next) {
+	if(req.isAuthenticated()) {
+		return res.redirect('/');
+	}
 	passport.authenticate('local', function(err, user, info) {
 		if (err) return next(err);
 		if (!user) { 
 			req.session.message = info;
-      		return res.redirect('/login'); 
-      	}
+			return res.redirect('/login'); 
+		}
 		req.logIn(user, function(err) {
 			if (err) return next(err);
 			return res.redirect('/');
-	});
-})(req, res, next);
+		});
+	})(req, res, next);
 });
+
 
 router.get('/logout' , function(req, res) {
 	req.logout();
@@ -60,32 +67,37 @@ router.post('/register', function(req, res, next) {
 				});
 				var str = JSON.stringify(err);
 				console.log(str)
-			}
-			// } else {
-			// 	if(!req.user)
-			// 		db.query('SELECT * FROM users ORDER BY username DESC LIMIT 1', function(err, results, fields) {
-			// 		if (err) throw err;
+			} else {
+				if(!req.user)
+					db.query('SELECT * FROM users ORDER BY username DESC LIMIT 1', function(err, results, fields) {
+					if (err) throw err;
 					
-			// 		var user = results[0].username;
-			// 		req.login(user, function (err) {
-			// 			if (err) console.log(err);
-			// 			res.send({
-			// 				redirectTo: '/',
-			// 				msg: 'User Registerd Successfully'
-			// 			});
-			// 		});
+					var user = results[0].username;
+					req.login(user, function (err) {
+						if (err) console.log(err);
+						res.send({
+							redirectTo: '/',
+							msg: 'User Registerd Successfully'
+						});
+					});
 
-			// 	});
-			// }
+				});
+			}
 		});
 	});
 });
 
 router.get('/viewPatients', function (req, res) {
-	res.render('viewPatients', {title : "View patients Patients"});
+	if(!req.isAuthenticated()) {
+		return res.render('error', {title : 'please login to continue'});
+	}
+	res.render('viewPatients', {title : "View patients"});
 });
 
 router.get('/addPatient', function (req, res) {
+	if(!req.isAuthenticated()) {
+		return res.render('error', {title : 'please login to continue'});
+	}
 	res.render('addPatient', {title : "Adding Patients"});
 });
 
@@ -102,24 +114,38 @@ router.post('/addPatient', function (req, res) {
 
 	const db = require('../dbconfig.js');
 
-	query = db.query('INSERT INTO patients (pname, pgender, page, regDate) values (?, ?,? , ?)',patient, function (err, results, fields) {
+	query = db.query('INSERT INTO patients (pname, pgender, page, regDate) values (?, ?, ?, ?)',patient, function (err, results, fields) {
 		if (err) {
 			console.log(err);
-			res.send('Error Inserting Patient');
+			res.json({msg: 'Error Inserting Patient', redirectTo : '/addPatient'});
 		} else {
-			res.send({msg : 'Patient registerd sucessfully', redirectTo : '/addPatient'});
+			res.json({msg : 'Patient registerd sucessfully', redirectTo : '/addPatient'});
 		}
-	})
-
+	});
 });
 
-router.get('/patients', function (req, res) {
+router.get('/patients/:count', function (req, res) {
 	const db = require('../dbconfig.js');
-	query = db.query("SELECT pid, pname, pgender, page , date_format(regDate,'%d-%b-%Y') AS regDate FROM PATIENTS", function(err, results) {
+	var count = parseInt(req.params.count);
+	query = db.query("SELECT pid, pname, pgender, page , date_format(regDate,'%d-%b-%Y') AS regDate, noV, status FROM PATIENTS ORDER BY pid DESC LIMIT ? ,5",count, function(err, results) {
+		if(err)console.log(err);
 		var str = JSON.stringify(results);
 		var patients = JSON.parse(str);
 		res.json(patients);
 	});
+});
+
+router.post('/updatePatient', function(req, res) {
+	const db = require('../dbconfig.js');
+	const pid = req.body.pid;
+	const status = req.body.status;
+	query = db.query('UPDATE patients SET noV = nov+1 , status = ? WHERE pid = ? ', [status, pid], function (err, results) {
+		if(err) {
+			res.json({msg : 'Error Updating the details \nif the error continious contact the administrator'});
+		} else {
+			res.json({msg: 'Patient details updated'});
+		}
+	})
 });
 
 passport.serializeUser(function(user, done) {

@@ -11,11 +11,33 @@
 						<th>Gender</th>
 						<th>Age</th>
 						<th>Registered Date</th>
+						<th>Visit Count</th>
+						<th>Patient Status</th>
+						<th>Status update</th>
 					</tr>
 				</thead>
 				<tbody id="patients"></tbody>
+				<tfoot>
+					<tr>
+						<td colspan="4" style="text-align: left">
+							<button type="button" id="previous" class="mdc-button mdc-button--raised" disabled>
+								<i class="material-icons mdc-button__icon">navigate_before</i>
+								Previous
+							</button> 
+						</td>
+						<td colspan="4" style="text-align: right">
+							<button type="button" id="next" class="mdc-button mdc-button--raised">
+								Next								
+								<i class="material-icons mdc-button__icon" style="padding : 0 0 0 8px">navigate_next</i>
+							</button> 
+						</td>
+					</tr>
+				</tfoot>
 			</table>
 		</div>
 	</div>
 	<script src="js/viewPatients.js"></script>
+	<script>
+		const ripple =	mdc.ripple.MDCRipple.attachTo(document.querySelector('.update'));
+	</script>
 {{> footer-end }}

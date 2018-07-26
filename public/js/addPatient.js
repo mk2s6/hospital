@@ -1,8 +1,8 @@
 $(function () {
     $('#patient').on('submit', function () {
-        var pname = $("input[name='pname']").val();
-        var pgender = $("input[name='pgender']").val();
-        var page = $("select[name='age']").val();
+        var pname = $("input[name=pname]").val();
+        var pgender = $("input[name='pgender']:checked").val();
+        var page = $("select[name=age]").val();
         var patient = {
             pname : pname,
             pgender : pgender,
@@ -18,11 +18,10 @@ $(function () {
                 alert(res.msg);
                 window.location = res.redirectTo;
             },
-            error : function (res,e, ts, et) {
-             alert("error");
-             console.log(res +"some error" + ts + " " + et);
+            error : function (e, ts, et) {
+                console.log(e + "some error" + ts + " " + et);
+                alert("error");
             } 
         });
-
-    })
-})
+    });
+});

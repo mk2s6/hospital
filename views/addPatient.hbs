@@ -24,7 +24,7 @@
                             <td>
                                 <div class="mdc-form-field">
                                 <div class="mdc-radio">
-                                    <input class="mdc-radio__native-control" type="radio" value="Male" id="male" name="pgender" required>
+                                    <input class="mdc-radio__native-control" id="male" type="radio" value="Male" name="pgender">
                                     <div class="mdc-radio__background">
                                     <div class="mdc-radio__outer-circle"></div>
                                     <div class="mdc-radio__inner-circle"></div>
@@ -33,7 +33,7 @@
                                 <label for="male">Male</label>
                                 </div><div class="mdc-form-field">
                                 <div class="mdc-radio">
-                                    <input class="mdc-radio__native-control" type="radio" id="female" value="Female" name="pgender" required>
+                                    <input class="mdc-radio__native-control" id="female" type="radio" value="Female" name="pgender">
                                     <div class="mdc-radio__background">
                                     <div class="mdc-radio__outer-circle"></div>
                                     <div class="mdc-radio__inner-circle"></div>
@@ -154,8 +154,8 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td>
-                                <button type="submit" class="mdc-button mdc-button--unelevated">
+                            <td colspan="3">
+                                <button id="regPat"  type="submit" class="mdc-button mdc-button--unelevated">
                                     <i class="material-icons mdc-button__icon">how_to_reg</i>
                                     Register Patient
                                 </button>
@@ -166,5 +166,11 @@
             </form>
 		</div>
     </div>
+
     <script src="js/addPatient.js"></script>
+
+    <script>
+		const select = new mdc.select.MDCSelect(document.querySelector('.mdc-select'));
+    </script>
+
 {{> footer-end }}
