@@ -3,7 +3,6 @@ var router = express.Router();
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 var parser = require('body-parser');
-var fs = require('fs');
 
 var passport = require('passport');
 
@@ -20,7 +19,7 @@ router.get('/login', function (req, res, next) {
 	if(req.isAuthenticated()) {
 		return res.redirect('/');
 	}
-		res.render('login.hbs', {title: 'Log In form'});
+	res.render('login.hbs', {title: 'Log In form'});
 });	
 
 router.post('/login', function(req, res, next) {
@@ -49,7 +48,7 @@ router.get('/logout' , function(req, res) {
 
 router.get('/register', function (req, res, next) {
 	res.render('register.hbs', {title: 'Registration form'})
-});	
+});
 
 router.post('/register', function(req, res, next) {
 	const username = req.body.username;

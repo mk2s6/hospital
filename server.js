@@ -18,7 +18,6 @@ var LocalStrategy = require('passport-local').Strategy;
 
 require('dotenv').config();
 
-var bodyParser = require('body-parser');
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/src'));
@@ -36,7 +35,8 @@ app.set('view engine', '.hbs');
 
 
 const port = process.env.SERVER_PORT;
-app.listen(port || 4200, function (req, res) {
+
+app.listen(port , function (req, res) {
 	console.log('Server listnening at ' + port);
 });
 
@@ -55,7 +55,6 @@ app.use(session({
 	resave: false,
 	store: sessionStore,
 	saveUninitialized: false,
-  	// cookie: { secure: true }
 }));
 
 app.use(passport.initialize());
