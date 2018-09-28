@@ -1,9 +1,5 @@
 @import "@material/button/mdc-button";
-@import "@material/form-field/mdc-form-field";
-@import "@material/radio/mdc-radio";
-@import "@material/floating-label/mdc-floating-label";
-@import "@material/textfield/mdc-text-field";
-@import "@material/shape/mixins";
+
 $maxwidth : 40px ;
 $mahheight : 20px;
 
@@ -13,21 +9,4 @@ $color2 :#AD1457;
  
 .mdc-button {
 	@include mdc-button-container-fill-color($color2);
-}
-
-.mdc-form-field {
-	@include mdc-radio-checked-stroke-color($color1);
-	@include mdc-radio-ink-color($color1);
-	@include mdc-radio-focus-indicator-color($color1);
-
-}
-
-.mdc-text-field {
-	// @include mdc-floating-label-above($color);
-	@include mdc-floating-label-ink-color($color1);
-	// @include mdc-floating-label-fill-color($color);
-}
-
-.my-shape-container {
-  @include mdc-shape-angled-corner(#fff, 10px);
 }
