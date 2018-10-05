@@ -26,12 +26,12 @@
         ) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
 # Create and updtae **.env** file:
 1.create a **.env** file and update the environment(database, server port) credentials from .env.default file
-2. update **.env** file as below
+2. update **.env** file as below:
+
 		DB_HOST= localhost (database host address)
 		DB_USER= root(user of database)
 		DB_PASSWORD= *********** (password to access a database)
 		DB_NAME= hospital (database name)
-
 		SERVER_PORT= 4200
 		
 		
@@ -39,5 +39,5 @@
 		
 # Installing and starting the server.
 1. To install node modules use **npm install** command.
-2.
+2. To start the server use **npm start** command
 2. 
