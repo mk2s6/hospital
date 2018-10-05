@@ -40,4 +40,3 @@
 # Installing and starting the server.
 1. To install node modules use **npm install** command.
 2. To start the server use **npm start** command
-2. 
